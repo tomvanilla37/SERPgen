@@ -51,9 +51,9 @@ When you finish the code in your branch request to merge with master branch
 git merge master
 ```
 
-now you can switch to master branch again.
+now you can switch to master branch again. (It seems out main branch name is not master!!!)
 ```bash
-git checkout master
+git checkout main
 ```
 
 # old ...
