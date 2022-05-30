@@ -48,7 +48,7 @@ git push origin BRANCH_NAME
 
 When you finish the code in your branch request to merge with master branch
 ```bash
-git merge master
+git merge main
 ```
 
 now you can switch to master branch again. (It seems out main branch name is not master!!!)
