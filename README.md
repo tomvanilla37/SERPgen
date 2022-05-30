@@ -1,3 +1,30 @@
+# setup
+clone git files
+```bash
+mkdir ~/code/tomvanilla37
+cd  ~/code/tomvanilla37
+git clone git@github.com:tomvanilla37/SERPgen.git
+cd SERPgen
+mkdir raw_data
+```
+
+create a virtual env for the project:
+```bash
+pyenv virtualenv SERPgen
+pyenv local SERPgen
+pip install --upgrade pip
+pip install -r https://gist.githubusercontent.com/krokrob/53ab953bbec16c96b9938fcaebf2b199/raw/9035bbf12922840905ef1fbbabc459dc565b79a3/minimal_requirements.txt
+pip list
+pip install -r requirements.txt
+```
+
+install the package
+```bash
+pip install -e .
+```
+
+
+# old ...
 # Data analysis
 - Document here the project: SERPgen
 - Description: Project Description
