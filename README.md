@@ -28,7 +28,7 @@ remember that use the following command to update the master branch every mornin
 pip pull
 ```
 
-# make a branch
+# Working inside a branch
 make a branch
 ```bash
 git branch BRANCH_NAME
