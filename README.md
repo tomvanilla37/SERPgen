@@ -23,10 +23,13 @@ install the package
 pip install -e .
 ```
 
-remember that use the following command to update the master branch every morning.
+remember that use the following command to update the main branch every morning.
 ```bash
-pip pull
+pip pull origin main
 ```
+if you use the above command where you are in your selected branch, all data from remote main branch will merge into your selected branch. 
+In case of any conflicts, you see some conflicts massages.
+
 
 # Working inside a branch
 make a branch
