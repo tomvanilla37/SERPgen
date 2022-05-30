@@ -10,8 +10,13 @@ def key_to_text(key_list):
     input:
         key_list: list of str
     output
-        text_out: str
+        text_out: strls
     '''
 
     text='dummy'
     return text
+
+
+f'''
+{key_to_text(['a','b'])}
+'''

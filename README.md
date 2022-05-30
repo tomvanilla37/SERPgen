@@ -23,6 +23,38 @@ install the package
 pip install -e .
 ```
 
+remember that use the following command to update the master branch every morning.
+```bash
+pip pull
+```
+
+# Working inside a branch
+make a branch
+```bash
+git branch BRANCH_NAME
+```
+
+switch to branch
+```bash
+git checkout BRANCH_NAME
+```
+
+after modifying your files, push them to the branch on github
+```bash
+git add FILES
+git commit -m 'SOME_MASSAGE'
+git push origin BRANCH_NAME
+```
+
+When you finish the code in your branch request to merge with master branch
+```bash
+git merge master
+```
+
+now you can switch to master branch again.
+```bash
+git checkout master
+```
 
 # old ...
 # Data analysis
