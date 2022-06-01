@@ -8,6 +8,7 @@ wheel>=0.29
 numpy
 pandas
 scikit-learn
+requests
 streamlit
 streamlit_tags
 typing-extensions
