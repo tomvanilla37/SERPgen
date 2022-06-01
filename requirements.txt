@@ -37,5 +37,5 @@ termcolor
 keytotext
 
 
-# opencv-python
-# transformers
+opencv-python
+transformers
