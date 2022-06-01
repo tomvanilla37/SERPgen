@@ -9,7 +9,11 @@ numpy
 pandas
 scikit-learn
 streamlit
+streamlit-tags
+time
+random
 typing-extensions
+requests
 
 # tests/linter
 black
