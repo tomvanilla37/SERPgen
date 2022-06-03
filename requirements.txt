@@ -40,3 +40,4 @@ keytotext
 
 opencv-python
 transformers
+memoized
