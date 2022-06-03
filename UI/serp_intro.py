@@ -54,5 +54,3 @@ def intro():
             time.sleep(7)
 
     intro_container.empty()
-
-intro()
