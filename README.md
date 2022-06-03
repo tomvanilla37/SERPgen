@@ -27,7 +27,7 @@ remember that use the following command to update the main branch every morning.
 ```bash
 pip pull origin main
 ```
-if you use the above command where you are in your selected branch, all data from remote main branch will merge into your selected branch. 
+if you use the above command where you are in your selected branch, all data from remote main branch will merge into your selected branch.
 In case of any conflicts, you see some conflicts massages.
 
 
@@ -58,6 +58,38 @@ now you can switch to master branch again. (It seems our main branch name is not
 ```bash
 git checkout main
 ```
+
+# How to deploy the api to google cloud
+For the first access login to google cloud
+```bash
+gcloud auth login
+gcloud auth list
+```
+
+First replace the project id and docker image name and export it. And build the image
+
+```bash
+export PROJECT_ID=wagon-bootcamp-351218
+echo $PROJECT_ID
+gcloud config set project $PROJECT_ID
+
+export DOCKER_IMAGE_NAME=api-serpgen-v1
+echo $DOCKER_IMAGE_NAME
+
+docker build -t eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME .
+```
+
+After a successful built you can push and deploy the image
+```bash
+docker push eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME
+gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME --platform managed --region europe-west1
+```
+
+Save the generated url  in a safe place.
+
+# How to deply the UI to heroku
+...
+
 
 # old ...
 # Data analysis
