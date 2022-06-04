@@ -8,10 +8,12 @@ wheel>=0.29
 numpy
 pandas
 scikit-learn
+requests
 streamlit
 streamlit-tags
 time
 random
+
 typing-extensions
 requests
 
@@ -23,6 +25,8 @@ pytest
 yapf
 
 # API
+uvicorn
+fastapi
 gcsfs
 google-cloud-storage
 mlflow
@@ -33,3 +37,11 @@ six>=1.14
 joblib
 memoized-property
 termcolor
+
+# keytotext
+keytotext
+
+
+opencv-python
+transformers
+memoized
