@@ -17,7 +17,11 @@ def key_to_text(key_list):
     key_list = (map(lambda x: x.lower(), key_list))
     key_list=",".join(key_list)
 
-    url = 'https://api-serpgen-kw3vzvzkiq-ew.a.run.app/predict?key_list=ali,city,london,france'
+    #pre trained
+    url = 'https://api-serpgen-kw3vzvzkiq-ew.a.run.app/predict'
+
+    #version 1
+    url = 'https://api-serpgen-v1-kw3vzvzkiq-ew.a.run.app/predict'
     params = {
         'key_list': key_list,
         'max_length':  max_length,
