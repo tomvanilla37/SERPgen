@@ -3,12 +3,11 @@ pip>=9
 numpy
 pandas
 requests
+typing-extensions
 streamlit
-streamlit-tags
 time
 random
-pytest
-typing-extensions
+streamlit-tags
 
 
 # # packaging
