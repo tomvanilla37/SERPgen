@@ -1,47 +1,60 @@
-# packaging
 pip>=9
-setuptools>=26
-twine
-wheel>=0.29
 
-# data science
 numpy
 pandas
-scikit-learn
 requests
 streamlit
 streamlit-tags
 time
 random
-
-typing-extensions
-requests
-
-# tests/linter
-black
-coverage
-flake8
 pytest
-yapf
+typing-extensions
 
-# API
-uvicorn
-fastapi
-gcsfs
-google-cloud-storage
-mlflow
-s3fs
 
-# utilities
-six>=1.14
-joblib
-memoized-property
-termcolor
+# # packaging
+# pip>=9
+# setuptools>=26
+# twine
+# wheel>=0.29
 
+# # data science
+# numpy
+# pandas
+# scikit-learn
+# requests
+# streamlit
+# streamlit-tags
+# time
+# random
+
+# typing-extensions
+# requests
+
+# # tests/linter
+# black
+# coverage
+# flake8
+# pytest
+# yapf
+
+# # API
+# uvicorn
+# fastapi
+# gcsfs
+# google-cloud-storage
+# mlflow
+# s3fs
+
+# # utilities
+# six>=1.14
+# joblib
+# memoized-property
+# termcolor
+
+# # keytotext
 # keytotext
-keytotext
 
 
-opencv-python
-transformers
-memoized
+# opencv-python
+# transformers
+# memoized
