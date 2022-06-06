@@ -7,6 +7,7 @@ wheel>=0.29
 numpy==1.22.4
 pandas==1.4.2
 typing_extensions==4.2.0
+python-dateutil
 requests==2.27.1
 streamlit==1.10.0
 streamlit-tags==1.2.8
