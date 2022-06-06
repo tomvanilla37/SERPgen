@@ -9,14 +9,26 @@ import pandas as pd
 SAMPLE_PARAMS = {"company_name": "XY Unlimited",
                  "product_name": "Cillit Bang 3000",
                  "purpose_type": "selling goods",
-                 "product_attributes": ["'Spee Powergel'", "washing detergent", "best on market", "new formula", "removes bacteria"],
+                 "product_attributes": ["'Spee Powergel'", "washing detergent", "best on market", "new formula", "removes bacteria", ".", "Try", "30-days money-back guarantee", "!"],
                  #"input_df": user_csv
                 }
 
 
 
 
-def key_to_text(key_list):
+def key_to_text(
+        key_list,
+        max_length: int = 512,          #512    ; 1024 not working
+        num_return_sequences: int = 5,    #1  ; 5 max
+        num_beams: int = 4,        #2
+        top_k: int = 10,            #50
+        top_p: float = 2.5,            #0.95
+        do_sample: bool = True,             #True
+        repetition_penalty: float = 3.5,    #2.5
+        length_penalty: float = 2.0,        #1.0
+        early_stopping: bool = True,        #True       ; makes sentence longer (makes up stuff)
+        skip_special_tokens: bool = True,   #True     ; creates </s> at end of sentence
+        clean_up_tokenization_spaces: bool = True,):    #True
     '''
     a funtion to get the list of keys and return a text
     input:
@@ -24,15 +36,30 @@ def key_to_text(key_list):
     output
         text_out: strls
     '''
-    #key_list = (map(lambda x: x.lower(), key_list))                 #why only lowercase input
-    key_list = ",".join(key_list)
+    key_list = (map(lambda x: x.lower(), key_list))
+    key_list=",".join(key_list)
 
-    url = "https://api-serpgen-v1-kw3vzvzkiq-ew.a.run.app/predict"
-    old_url = 'https://api-serpgen-kw3vzvzkiq-ew.a.run.app/predict'
+    #pre trained
+    url = 'https://api-serpgen-kw3vzvzkiq-ew.a.run.app/predict'
+
+    #version 1
+    url = 'https://api-serpgen-v1-kw3vzvzkiq-ew.a.run.app/predict'
     params = {
         'key_list': key_list,
-        'num_beams': 4             # crashes if below 1, stupid results if 1, from 6 on makes "best" to "best-selling", 7 includes more keywords (cf. dog sandals)
+        'max_length':  max_length,
+        'num_return_sequences':  num_return_sequences,
+        'num_beams':  num_beams,
+        'top_k':  top_k,
+        'top_p':  top_p,
+        'do_sample':  do_sample,
+        'repetition_penalty':  repetition_penalty,
+        'length_penalty':length_penalty,
+        'early_stopping':  early_stopping,
+        'skip_special_tokens':  skip_special_tokens,
+        'clean_up_tokenization_spaces':  clean_up_tokenization_spaces,
     }
+
+
     response = requests.get(url, params=params)
     text=response.json()
     #print(response.request.url) #uncomment to check request url
@@ -53,7 +80,7 @@ def gen_SERP_mass(params):
     #if params["purpose_type"] == "selling goods":    #uncomment and change indentation later to enable differed modes (goods, services, etc)
     mass_serp_df = params["input_df"].copy()
     for index, row in mass_serp_df.iterrows():
-        product_name = str(row["Product/Service Name"])
+        product_name = row["Product/Service Name"]
         product_attributes = row["Attributes"].split(", ")
         serp_api_output = key_to_text(product_attributes)
         serp_output = f"{product_name} by {company_name} - {serp_api_output}"
@@ -111,5 +138,5 @@ def list_collection():
                'advantage', 'journey', 'power', 'knowledge', 'deal']
 
 
-#print(gen_SERP_single(SAMPLE_PARAMS))
+print(gen_SERP_single(SAMPLE_PARAMS))
 #gen_SERP_mass(SAMPLE_PARAMS).to_csv("output_test.csv")
