@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run UI/serp.py
+web: sh setup.sh && streamlit run UI/serpV2.py
