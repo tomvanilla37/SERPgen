@@ -10,3 +10,4 @@ typing_extensions==4.2.0
 requests==2.27.1
 streamlit==1.10.0
 streamlit-tags==1.2.8
+pytest
