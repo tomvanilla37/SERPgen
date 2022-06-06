@@ -4,13 +4,13 @@ import random
 import streamlit as st
 import pandas as pd
 
-user_csv = pd.read_csv("Backend/Wowbow Dog SEO Products.csv")
+#user_csv = pd.read_csv("/home/tomvanilla/code/tomvanilla37/final project/data/Wowbow_Dog_Products.csv")
 
 SAMPLE_PARAMS = {"company_name": "XY Unlimited",
                  "product_name": "Cillit Bang 3000",
                  "purpose_type": "selling goods",
-                 "product_attributes": ["cleaning tool", "best on market", "new formula"],
-                 "input_df": user_csv
+                 "product_attributes": ["'Spee Powergel'", "washing detergent", "best on market", "new formula", "removes bacteria"],
+                 #"input_df": user_csv
                 }
 
 
@@ -27,13 +27,15 @@ def key_to_text(key_list):
     #key_list = (map(lambda x: x.lower(), key_list))                 #why only lowercase input
     key_list = ",".join(key_list)
 
-    url = 'https://api-serpgen-kw3vzvzkiq-ew.a.run.app/predict'
+    url = "https://api-serpgen-v1-kw3vzvzkiq-ew.a.run.app/predict"
+    old_url = 'https://api-serpgen-kw3vzvzkiq-ew.a.run.app/predict'
     params = {
-        'key_list': key_list
+        'key_list': key_list,
+        'num_beams': 4             # crashes if below 1, stupid results if 1, from 6 on makes "best" to "best-selling", 7 includes more keywords (cf. dog sandals)
     }
     response = requests.get(url, params=params)
     text=response.json()
-    print(response.request.url)
+    #print(response.request.url) #uncomment to check request url
     return text['prediction']
 
 
@@ -52,12 +54,11 @@ def gen_SERP_mass(params):
     mass_serp_df = params["input_df"].copy()
     for index, row in mass_serp_df.iterrows():
         product_name = str(row["Product/Service Name"])
-        #serp_api_output = "serp_api_output_dummy"
         product_attributes = row["Attributes"].split(", ")
         serp_api_output = key_to_text(product_attributes)
         serp_output = f"{product_name} by {company_name} - {serp_api_output}"
         print(serp_output)
-        mass_serp_df["Output (SERP text)"].iloc[index] = serp_output
+        mass_serp_df.loc[index, ("Output (SERP text)")] = serp_output       #old syntax: df["column"].loc[index] wokring, but gave error/warning
     SERP_mass_output = mass_serp_df
     return SERP_mass_output   #return pandas df
 
@@ -65,21 +66,27 @@ def gen_SERP_mass(params):
 def gen_SERP_goods(params):
     api_output = key_to_text(params["product_attributes"])
     serp_head = f"{params['product_name']} by {params['company_name']} - "
-    merged_output = serp_head+api_output
+    merged_output = serp_head+api_output # +gen_CTA_goods()
     return merged_output
 
 def gen_SERP_services(params):
     api_output = key_to_text(params["product_attributes"])
     serp_head = f"{params['product_name']} from {params['company_name']} - "
-    merged_output = serp_head+api_output
+    merged_output = serp_head+api_output # +gen_CTA_services()
     return merged_output
 
 
 
+def gen_CTA_goods(params):
+    pass
+
+def gen_CTA_services(params):
+    pass
+
 def list_collection():
     goods = ['buy', 'purchase', 'order', 'sale', 'shop', 'discover', 'acquire', 'get', 'take']
 
-    servives = ['come', 'enjoy', 'feel', 'try', 'benefit', 'appreciate', 'relish']
+    services = ['come', 'enjoy', 'feel', 'try', 'benefit', 'appreciate', 'relish']
 
     online = ['register', 'subscribe', 'join', 'be a part', 'try out', 'broadcast', 'discover', 'download', 'develop', 'invest', 'secure']
 
@@ -104,5 +111,5 @@ def list_collection():
                'advantage', 'journey', 'power', 'knowledge', 'deal']
 
 
-print(gen_SERP_single(SAMPLE_PARAMS))
+#print(gen_SERP_single(SAMPLE_PARAMS))
 #gen_SERP_mass(SAMPLE_PARAMS).to_csv("output_test.csv")
