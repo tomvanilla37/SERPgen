@@ -3,8 +3,8 @@ import pandas as pd
 import streamlit as st
 from streamlit_tags import st_tags, st_tags_sidebar
 import random
-from serp_backend import key_to_text
-import serp_intro
+from serp_backend import key_to_text, gen_SERP_single, gen_SERP_mass
+#import serp_intro
 
 st.set_page_config(page_title="SERPgen - Just Snip It!")
 
@@ -29,25 +29,27 @@ if input_mod == 'Single':
                 "product_attributes": product_attributes
                 }
         with st.spinner("Creating your customized SERP Result..."):
-            pass #output_single = gen_SERP_single(params)
-        st.markdown(
-                    # '''
-                    # <font face="Arial" size="14px" color="#006621">https://wooptor.com > products > woopto-classic-red</font><br>
-                    # <font face="Arial" size="18px" color="#1a0dab">Woopto Classic Red Dog Collar and Leash - Wooptor</font><br>
-                    # <font face="Arial" size="13px" color="#545454">Woopto Classic Red Dog Collar and Leash - Comfortable, durable and stylish dog collars</font>
-                    # '''
-                    '''
-                    <div class= 'container'>
-                    .container {display:flex;}</div>
-                        <div class= 'link'>
-                        <p><font face="Arial" size="14px" color="#006621">https://wooptor.com > products > woopto-classic-red</font></p>
-                        <p><font face="" size="18px" color="#1a0dab">Woopto Classic Red Dog Collar and Leash - Wooptor</font></p>
-                        <p><font face="Arial" size="13px" color="#545454">Woopto Classic Red Dog Collar and Leash - Comfortable, durable and stylish dog collars</font></p>
-                        </div>
-                        <div class= 'google-image'>
-                        .google-image{<img src="https://cdn.shopify.com/s/files/1/0024/6025/4254/products/bunte-Leinen-und-Halsbaender-rot-L-2_1x1.jpg?v=1638825557" object-fit: contain; </img>}</div>
-                    '''
-                    , unsafe_allow_html=True)
+            output_single = gen_SERP_single(params)
+            st.write(output_single)
+        # st.markdown(
+        #             # '''
+        #             # <font face="Arial" size="14px" color="#006621">https://wooptor.com > products > woopto-classic-red</font><br>
+        #             # <font face="Arial" size="18px" color="#1a0dab">Woopto Classic Red Dog Collar and Leash - Wooptor</font><br>
+        #             # <font face="Arial" size="13px" color="#545454">Woopto Classic Red Dog Collar and Leash - Comfortable, durable and stylish dog collars</font>
+        #             # '''
+        #             '''
+        #             <div class= 'container'>
+        #             .container {display:flex;}
+        #                 <div class= 'link'>
+        #                 <p><font face="Arial" size="14px" color="#006621">https://wooptor.com > products > woopto-classic-red</font></p>
+        #                 <p><font face="" size="18px" color="#1a0dab">Woopto Classic Red Dog Collar and Leash - Wooptor</font></p>
+        #                 <p><font face="Arial" size="13px" color="#545454">Woopto Classic Red Dog Collar and Leash - Comfortable, durable and stylish dog collars</font></p>
+        #                 </div>
+        #                 <div class= 'google-image'>
+        #                 .google-image{<img src="https://cdn.shopify.com/s/files/1/0024/6025/4254/products/bunte-Leinen-und-Halsbaender-rot-L-2_1x1.jpg?v=1638825557" object-fit: contain; </img>}</div>
+        #                 </div>
+        #             '''
+        #             , unsafe_allow_html=True)
 
 else:
     user_csv= st.file_uploader("Please provide your CSV!", type=["csv"])
@@ -55,11 +57,18 @@ else:
         input_df = pd.read_csv(user_csv)
         with st.expander('Preview of your file:'):
             st.dataframe(input_df)
-        params = {"company_name": company_name,
-                 "purpose_type": purpose_type
-                }
-        with st.spinner("Creating your customized SERPed CSV-file..."):
-            pass #output_csv = df.to_csv(gen_SERP_mass(params))
-        st.download_button('Download your "Serped-CSV"-file', data=output_csv, file_name=f'{company_name}_SERPgen.csv')
+    if st.button('SERP my csv.file!') and user_csv:
+        if company_name != "":
+            params = {"company_name": company_name,
+                    "purpose_type": purpose_type,
+                    "input_df": input_df
+                    }
+            with st.spinner("Creating your customized SERPed CSV-file..."):
+                output_df = gen_SERP_mass(params)
+                output_csv = output_df.to_csv()
+                with st.expander('Preview of your SERPed-file:'):
+                    st.dataframe(output_df)
+                st.download_button('Download your "SERPed-CSV"-file', data=output_csv, file_name=f'{company_name}_SERPgen.csv')
+        else: st.write('Please provide your company name!')
 
 #if __name__ == "__main__":
