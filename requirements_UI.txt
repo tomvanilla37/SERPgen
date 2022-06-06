@@ -1,0 +1,11 @@
+pip>=9
+
+numpy
+pandas
+scikit-learn
+requests
+streamlit
+streamlit-tags
+time
+random
+pytest
