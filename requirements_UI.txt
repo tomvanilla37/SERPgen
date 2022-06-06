@@ -1,12 +1,14 @@
 pip>=9
+setuptools>=26
+twine
+wheel>=0.29
 
 numpy
 pandas
-scikit-learn
-requests
-streamlit
-streamlit-tags
 time
 random
 pytest
 typing-extensions
+requests
+streamlit
+streamlit-tags

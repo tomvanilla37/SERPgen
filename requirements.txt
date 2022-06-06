@@ -1,14 +1,17 @@
 pip>=9
+setuptools>=26
+twine
+wheel>=0.29
 
 numpy
 pandas
-requests
-typing-extensions
-streamlit
 time
 random
+pytest
+typing-extensions
+requests
+streamlit
 streamlit-tags
-
 
 # # packaging
 # pip>=9
