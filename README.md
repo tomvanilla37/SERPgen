@@ -82,89 +82,59 @@ docker build -t eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME .
 After a successful built you can push and deploy the image
 ```bash
 docker push eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME
-gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME --platform managed --region europe-west1
+gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME --platform managed --region europe-west1 \
+  --memory 8000M --cpu 2 --allow-unauthenticated
 ```
 
 Save the generated url  in a safe place.
 
-# How to deply the UI to heroku
-...
-
-
-# old ...
-# Data analysis
-- Document here the project: SERPgen
-- Description: Project Description
-- Data Source:
-- Type of analysis:
-
-Please document the project the better you can.
-
-# Startup the project
-
-The initial setup.
-
-Create virtualenv and install the project:
+# How to deploy the UI to Heroku and GCP
+## How to deply the UI to Heroku
+To depoly the UI on the heroku, create a user name on heroku website and using the following command login into it.
 ```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
+heroku login
 ```
 
-Unittest test:
+use the following command to create the project and push it to heroku, after modifying *UI_NAME*.
 ```bash
-make clean install test
+export UI_NAME=serpv2
+echo $UI_NAME
+heroku create ${APP_NAME}
+
+git push heroku main:main
+heroku ps:scale web=1
 ```
 
-Check for SERPgen in gitlab.com/{group}.
-If your project is not set please add it:
+After a successful depoyment, save the generated line of your UI website.
 
-- Create a new project on `gitlab.com/{group}/SERPgen`
-- Then populate it:
-
+## How to deply the UI to GCP
+To depoly the UI on the GCP, create a user name on GCP and using the following command login into it.
 ```bash
-##   e.g. if group is "{group}" and project_name is "SERPgen"
-git remote add origin git@github.com:{group}/SERPgen.git
-git push -u origin master
-git push -u origin --tags
+gcloud auth list
+gcloud auth login
+
+gcloud auth configure-docker
 ```
 
-Functionnal test with a script:
+To use gcp for deploying the UI, we need a Docker container.
+In the follwoing command, moddify the *PROJECT_ID* and *DOCKER_IMAGE_NAME*. Then using the *Dockerfile_api*, build the docker container.
 
 ```bash
-cd
-mkdir tmp
-cd tmp
-SERPgen-run
+export PROJECT_ID=wagon-bootcamp-351218
+echo $PROJECT_ID
+gcloud config set project $PROJECT_ID
+
+export DOCKER_IMAGE_NAME=api-serpgen-ui
+echo $DOCKER_IMAGE_NAME
+
+docker build  -f Dockerfile_api -t eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME .
 ```
 
-# Install
-
-Go to `https://github.com/{group}/SERPgen` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
+After a successful building, you are able to push and deploy the container to GCP.
 ```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
+docker push eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME
+gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME --platform managed --region europe-west1 \
+   --memory 700M --allow-unauthenticated
 ```
 
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/SERPgen.git
-cd SERPgen
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-SERPgen-run
-```
-
-some changes
+After a successful depoyment, save the generated line of your UI website.
