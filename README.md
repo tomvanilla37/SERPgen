@@ -82,7 +82,8 @@ docker build -t eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME .
 After a successful built you can push and deploy the image
 ```bash
 docker push eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME
-gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME --platform managed --region europe-west1 \
+gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME \
+  --platform managed --region europe-west1 \
   --memory 8000M --cpu 2 --allow-unauthenticated
 ```
 
@@ -133,7 +134,8 @@ docker build  -f Dockerfile_ui -t eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME .
 After a successful building, you are able to push and deploy the container to GCP.
 ```bash
 docker push eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME
-gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME --platform managed --region europe-west1 \
+gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME \
+   --platform managed --region europe-west1 \
    --memory 700M --allow-unauthenticated
 ```
 
