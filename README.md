@@ -117,7 +117,7 @@ gcloud auth configure-docker
 ```
 
 To use gcp for deploying the UI, we need a Docker container.
-In the follwoing command, moddify the *PROJECT_ID* and *DOCKER_IMAGE_NAME*. Then using the *Dockerfile_api*, build the docker container.
+In the follwoing command, moddify the *PROJECT_ID* and *DOCKER_IMAGE_NAME*. Then using the *Dockerfile_ui*, build the docker container.
 
 ```bash
 export PROJECT_ID=wagon-bootcamp-351218
@@ -127,7 +127,7 @@ gcloud config set project $PROJECT_ID
 export DOCKER_IMAGE_NAME=api-serpgen-ui
 echo $DOCKER_IMAGE_NAME
 
-docker build  -f Dockerfile_api -t eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME .
+docker build  -f Dockerfile_ui -t eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME .
 ```
 
 After a successful building, you are able to push and deploy the container to GCP.
