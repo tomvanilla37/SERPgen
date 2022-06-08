@@ -100,7 +100,7 @@ use the following command to create the project and push it to heroku, after mod
 ```bash
 export UI_NAME=serpv2
 echo $UI_NAME
-heroku create ${APP_NAME}
+heroku create ${UI_NAME}
 
 git push heroku main:main
 heroku ps:scale web=1
