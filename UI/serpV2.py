@@ -1,13 +1,10 @@
-#import numpy
 import pandas as pd
 import streamlit as st
 from streamlit_tags import st_tags, st_tags_sidebar
 import streamlit.components.v1 as components
 
-#import random
 from serp_backend import key_to_text, gen_SERP_single, gen_SERP_mass
 from gstyle_output import gen_SERP_preview
-#import serp_intro
 
 st.set_page_config(page_title="SERPgen - Just Snip It!")
 #st.image(image='./UI/cut_logo.png', use_column_width = True)
@@ -21,9 +18,9 @@ with col3:
 
 nam, claim = st.columns(2)
 with nam:
-    company_name = st.text_input('My company is called:', key='com_nam')
+    company_name = st.text_input('Company name:', key='com_nam')
 with claim:
-    company_claim = st.text_input('My company\'s claim is:', help= 'short description/slogan or claim of your company', key='com_cla')
+    company_claim = st.text_input('Company\'s claim:', help= 'short description/slogan or claim of your company', key='com_cla')
 purp, mod = st.columns(2)
 with purp:
     purpose_type = st.radio('Purpose', ['selling goods', 'promoting services'])
@@ -32,12 +29,12 @@ with mod:
 if input_mod == 'Single':
     prod, cat, keys = st.columns(3)
     with prod:
-        product_name = st.text_input('Provide your product/service name:', key='prod_nam')
+        product_name = st.text_input('Product name:', key='prod_nam')
     with cat:
-        product_category = st.text_input('Provide your product category:', help = 'What kind of product are you offering?', key='prod_cat')
+        product_category = st.text_input('Category of product/service:', help = 'What kind of product are you offering?', key='prod_cat')
     with keys:
         product_attributes = st_tags(
-        label= ('Please specify some attributes:'),
+        label= ('Features of the product/service:'),
         text ='Press enter to add more',
         #value = ['unique'],
         #maxtags=3,
@@ -57,7 +54,9 @@ if input_mod == 'Single':
                 st.markdown(f'> {output_single}')
                 ### google like out put +++###
                 with st.expander('Preview your SERP-output in Google:'):
-                    components.html(gen_SERP_preview(user_input_vals, output_single))
+                    print(user_input_vals["product_category"])
+                    html = gen_SERP_preview(user_input_vals, output_single)
+                    components.html(html)
                     st.balloons()
         else: st.write('Please provide some attributes of your product!')
 else:

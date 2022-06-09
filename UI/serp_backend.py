@@ -3,18 +3,17 @@ import requests
 import random
 import pandas as pd
 
-#user_csv = pd.read_csv("Wowbow_Dog_Products.csv")
-#user_csv2 = pd.read_csv("Wowbow_Dog_Services.csv")
+# user_csv = pd.read_csv("Wowbow_Dog_Products.csv")
+# user_csv2 = pd.read_csv("Wowbow_Dog_Services.csv")
 
-SAMPLE_PARAMS = {"company_name": "XY Unlimited",
-                 "company_claim": "the best shop in town!",
-                 "product_name": "Cillit Bang 3000",
-                 "purpose_type": "selling goods",   #selling goods #promoting services
-                 "product_attributes": ["'Spee Powergel'", "best on market", "new formula", "removes bacteria", "!"],
-                 "product_category": "washing detergent",
-                 #"input_df": user_csv
-                }
-
+# SAMPLE_PARAMS = {"company_name": "XY Unlimited",
+#                  "company_claim": "the best shop in town!",
+#                  "product_name": "Cillit Bang 3000",
+#                  "purpose_type": "selling goods",   #selling goods #promoting services
+#                  "product_attributes": ["'Spee Powergel'", "best on market", "new formula", "removes bacteria", "!"],
+#                  "product_category": "washing detergent",
+#                  "input_df": user_csv
+#                 }
 
 WORD_COLLECTION = {
                     "GOODS" : ['Buy', 'Purchase', 'Order', 'Shop', 'Discover', 'Acquire', 'Get', 'Take', 'Check out'],
@@ -114,13 +113,13 @@ def check_claim(claim):
     else:
         pass
 
+
 def gen_SERP_single(user_input_vals):
     if user_input_vals["purpose_type"] == "selling goods":
         SERP_single_output = gen_SERP_goods(user_input_vals)
     elif user_input_vals["purpose_type"] == "promoting services":
         SERP_single_output = gen_SERP_services(user_input_vals)
     return SERP_single_output
-
 
 
 def gen_SERP_mass(user_input_vals):
