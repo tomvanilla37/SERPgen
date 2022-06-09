@@ -12,7 +12,7 @@ SAMPLE_PARAMS = {"company_name": "XY Unlimited",
                  "purpose_type": "selling goods",   #selling goods #promoting services
                  "product_attributes": ["'Spee Powergel'", "best on market", "new formula", "removes bacteria", "!"],
                  "product_category": "washing detergent",
-                 "input_df": user_csv
+                 #"input_df": user_csv
                 }
 
 
