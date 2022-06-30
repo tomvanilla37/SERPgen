@@ -108,7 +108,7 @@ heroku ps:scale web=1
 
 After a successful depoyment, save the generated line of your UI website.
 
-## How to deply the UI to GCP
+## How to deploy the UI to GCP
 To depoly the UI on the GCP, create a user name on GCP and using the following command login into it.
 ```bash
 gcloud auth list
@@ -139,4 +139,4 @@ gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME \
    --memory 700M --allow-unauthenticated
 ```
 
-After a successful depoyment, save the generated line of your UI website.
+After successful depoyment, save the generated line of your UI website.
