@@ -24,7 +24,7 @@ https://serpv1.herokuapp.com/
 # Deploy the entire user interface on your own
 First clone the entire repository with git lfs(large file System) clone.
 ```bash
-git install lfs
+git lfs install
 git lfs clone git@github.com:tomvanilla37/SERPgen.git
 ```
 
