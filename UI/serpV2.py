@@ -3,7 +3,7 @@ import streamlit as st
 from streamlit_tags import st_tags, st_tags_sidebar
 import streamlit.components.v1 as components
 
-from serp_backend import key_to_text, gen_SERP_single, gen_SERP_mass
+from serp_backend import key_to_text, gen_serp_single, gen_serp_mass
 from gstyle_output import gen_SERP_preview
 
 st.set_page_config(page_title="SERPgen - Just Snip It!")
@@ -50,7 +50,7 @@ if input_mod == 'Single':
                 }
         if product_attributes:
             with st.spinner("Creating your customized SERP Result..."):
-                output_single = gen_SERP_single(user_input_vals)
+                output_single = gen_serp_single(user_input_vals)
                 st.markdown(f'> {output_single}')
                 ### google like out put +++###
                 with st.expander('Preview your SERP-output in Google:'):
@@ -73,7 +73,7 @@ else:
                                 "input_df": input_df
                                 }
             with st.spinner("Creating your customized SERPed Excel-file..."):
-                output_df = gen_SERP_mass(user_input_vals)
+                output_df = gen_serp_mass(user_input_vals)
                 output_csv = output_df.to_csv()
                 with st.expander('Preview of your SERPed-file:'):
                     st.dataframe(output_df)
