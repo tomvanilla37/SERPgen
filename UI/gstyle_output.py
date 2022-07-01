@@ -2,6 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 
 def fetch_google_img_url(user_input_vals):
+    """fetch url of image search website based on product category
+
+    Args:
+        user_input_vals: dict with values input by user including "product_category"
+    Returns:
+        url of image
+
+    """
     #print(product_category)
     img_keyword = str(user_input_vals["product_category"])
     img_keyword = img_keyword.replace(" ", "-")
@@ -28,7 +36,16 @@ def fetch_google_img_url(user_input_vals):
         except:
                 return "http://static.everypixel.com/ep-pixabay/0872/5777/6601/85204/8725777660185204100-ecommerce.jpg"
 
-def gen_SERP_preview(user_input_vals, output_single):
+def gen_serp_preview(user_input_vals, output_single):
+    """fetch url of image search website based on product category
+
+    Args:
+        user_input_vals: dict with values input by user
+        output_single: SERP result processed via backend
+    Returns:
+        html code that presents SERP text as though it was an actual google search result
+
+    """
     serp_pic = str(fetch_google_img_url(user_input_vals))
     html_output = f"""<html lang="en">
         <head>
@@ -36,7 +53,6 @@ def gen_SERP_preview(user_input_vals, output_single):
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <title>HTML 5 Boilerplate</title>
-
             <style>
                     div span {{display: inline-block;}}
                     p {{margin-block-start: 0; margin-block-end: 0;}}
@@ -45,7 +61,6 @@ def gen_SERP_preview(user_input_vals, output_single):
                     div.container {{display: flex;justify-content: space-between;}}
             </style>
         </head>
-
         <body>
             <div class="container">
             <div class="a">
