@@ -1,20 +1,21 @@
 import pandas as pd
 import streamlit as st
-from streamlit_tags import st_tags, st_tags_sidebar
+from streamlit_tags import st_tags
 import streamlit.components.v1 as components
 
-from serp_backend import key_to_text, gen_SERP_single, gen_SERP_mass
-from gstyle_output import gen_SERP_preview
+from serp_backend import gen_serp_single, gen_serp_mass
+from gstyle_output import gen_serp_preview
 
 st.set_page_config(page_title="SERPgen - Just Snip It!")
-#st.image(image='./UI/cut_logo.png', use_column_width = True)
+
 col1, col2, col3 = st.columns(3)
 with col1:
     st.write("")
 with col2:
     st.write("")
 with col3:
-    st.image(image='./UI/cut_logo.png', use_column_width = True)
+    pass
+    #st.image(image='./UI/cut_logo.png', use_column_width = True)
 
 nam, claim = st.columns(2)
 with nam:
@@ -25,7 +26,7 @@ purp, mod = st.columns(2)
 with purp:
     purpose_type = st.radio('Purpose', ['selling goods', 'promoting services'])
 with mod:
-    input_mod = st.radio('Single query or mass query via Excel-file?', ['Single', 'Excel-Upload'])
+    input_mod = st.radio('Single query or mass query via CSV file?', ['Single', 'CSV Upload'])
 if input_mod == 'Single':
     prod, cat, keys = st.columns(3)
     with prod:
@@ -35,9 +36,7 @@ if input_mod == 'Single':
     with keys:
         product_attributes = st_tags(
         label= ('Features of the product/service:'),
-        text ='Press enter to add more',
-        #value = ['unique'],
-        #maxtags=3,
+        text ='Press enter after each word',
         key="keys2")
         st.caption('What kind of product are you offering? Let us know some details!')
     if st.button("Submit your choices!"):
@@ -48,23 +47,27 @@ if input_mod == 'Single':
                 "product_category": product_category,
                 "product_attributes": product_attributes
                 }
-        if product_attributes:
+        if company_name and product_name and product_category and product_attributes:
             with st.spinner("Creating your customized SERP Result..."):
-                output_single = gen_SERP_single(user_input_vals)
+                output_single = gen_serp_single(user_input_vals)
                 st.markdown(f'> {output_single}')
-                ### google like out put +++###
+                ### google like output preview ###
                 with st.expander('Preview your SERP-output in Google:'):
                     print(user_input_vals["product_category"])
-                    html = gen_SERP_preview(user_input_vals, output_single)
+                    html = gen_serp_preview(user_input_vals, output_single)
                     components.html(html)
                     st.balloons()
-        else: st.write('Please provide some attributes of your product!')
+        else: st.error('Please provide your company/product info!')
 else:
-    user_file= st.file_uploader("Please provide your Excel-file!", type=["xls", "xlsx", "xlsm", "xlsb", "odf", "ods", "odt", "csv"])
+    user_file= st.file_uploader("Please provide your CSV-file!", type=["xls", "xlsx", "xlsm", "xlsb", "odf", "ods", "odt", "csv"])
     if user_file:
         input_df = pd.read_csv(user_file)
-        with st.expander('Preview of your file:'):
-            st.dataframe(input_df)
+        if input_df["Attributes"].str.len().max() > 21:
+            st.error('Number of rows/product limited to 20 in free version!')
+
+        else:
+            with st.expander('Preview of your file:'):
+                st.dataframe(input_df)
     if st.button('SERP my file!') and user_file:
         if company_name != "":
             user_input_vals = {"company_name": company_name,
@@ -81,5 +84,3 @@ else:
                 st.download_button('Download your "SERPed-CSV-file"', data=output_csv, file_name=f'{company_name}_SERPgen.csv')
 
         else: st.write('Please provide your company name!')
-
-#if __name__ == "__main__":
