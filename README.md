@@ -55,7 +55,8 @@ gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME \
   --memory 8000M --cpu 2 --allow-unauthenticated
 ```
 
-Save the generated url  in a safe place.
+After a successful depoyment, save the generated link of your API website.
+Replace the link of api in the function *key_to_text* in the file *UI/serp_backend.py*
 
 ## How to deploy the UI to Heroku and GCP
 ### How to deply the UI to Heroku
@@ -73,9 +74,6 @@ heroku create ${UI_NAME}
 git push heroku main:main
 heroku ps:scale web=1
 ```
-
-After a successful depoyment, save the generated link of your UI website.
-Replace the link of api in the function *key_to_text* in the file *UI/serp_backend.py*
 
 ### How to deply the UI to GCP
 To depoly the UI on the GCP, create a user name on GCP and using the following command login into it.
