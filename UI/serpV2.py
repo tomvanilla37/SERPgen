@@ -14,8 +14,7 @@ with col1:
 with col2:
     st.write("")
 with col3:
-    pass
-    #st.image(image='./UI/cut_logo.png', use_column_width = True)
+    st.image(image='./UI/cut_logo.png', use_column_width = True)
 
 nam, claim = st.columns(2)
 with nam:
