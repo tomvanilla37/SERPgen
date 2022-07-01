@@ -70,7 +70,7 @@ export UI_NAME=serpv2
 echo $UI_NAME
 heroku create ${UI_NAME}
 
-git push heroku master:master
+git push heroku main:main
 heroku ps:scale web=1
 ```
 
