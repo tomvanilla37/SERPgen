@@ -1,72 +1,40 @@
-# setup
-clone git files
-```bash
-mkdir ~/code/tomvanilla37
-cd  ~/code/tomvanilla37
-git clone git@github.com:tomvanilla37/SERPgen.git
-cd SERPgen
-mkdir raw_data
-```
+# SERPgen - an NLP-based search results text generator
+This project uses natural language processing to generate SEQ (Search Engine Query) content from keywords.
 
-create a virtual env for the project:
-```bash
-pyenv virtualenv SERPgen
-pyenv local SERPgen
-pip install --upgrade pip
-pip install -r https://gist.githubusercontent.com/krokrob/53ab953bbec16c96b9938fcaebf2b199/raw/9035bbf12922840905ef1fbbabc459dc565b79a3/minimal_requirements.txt
-pip list
-pip install -r requirements.txt
-```
-
-install the package
-```bash
-pip install -e .
-```
-
-remember that use the following command to update the main branch every morning.
-```bash
-pip pull origin main
-```
-if you use the above command where you are in your selected branch, all data from remote main branch will merge into your selected branch.
-In case of any conflicts, you see some conflicts massages.
+The cost of writing Search Engine Result Page descriptions (title and snippet) is high for business owners. Such descriptions enable products and services to appear in searches and to generate leads.
+Because of the tedious process of creating individual descriptions for each product, Search Engine Optimization professionals can focus more on other important tasks.
 
 
-# Working inside a branch
-make a branch
-```bash
-git branch BRANCH_NAME
-```
+Using trained NLP models that are fed search results for similar products, SERPgenTM automatically generates search engine result title and description based on keywords such as company name + product name + attributes.
 
-switch to branch
-```bash
-git checkout BRANCH_NAME
-```
+<img src="UI/serpgen_g.png" width="500"/>
 
-after modifying your files, push them to the branch on github
-```bash
-git add FILES
-git commit -m 'SOME_MASSAGE'
-git push origin BRANCH_NAME
-```
+For more information please check the following presentation. <br />
+*[An NLP-based search results text generator](https://docs.google.com/presentation/d/1Vy21neAeTntBbcdmtyPCD2LMBnt8zpptBZHT6jL59mw/edit?usp=sharing)*
 
-When you finish the code in your branch request to merge with master branch
-```bash
-git merge main
-```
 
-now you can switch to master branch again. (It seems our main branch name is not master!!!)
-```bash
-git checkout main
-```
 
-# How to deploy the api to google cloud
-For the first access login to google cloud
+## Model:
+SERPgen is based on T5 model.
+
+You can access the online site by clicking the following link
+
+https://serpv1.herokuapp.com/
+
+# Deploy the entire user interface on your own
+To deploy the model, we need two different steps.
+1) Upload the api (docker file) on GCP to use the prediction of model
+2) Upload the UI to Heroku of GCP to use the api.
+
+
+## How to deploy the API on Google Cloud
+First, log in to Google Cloud
 ```bash
 gcloud auth login
 gcloud auth list
 ```
 
-First replace the project id and docker image name and export it. And build the image
+Then export the image by replacing the project id and docker image name. And build the image
 
 ```bash
 export PROJECT_ID=wagon-bootcamp-351218
@@ -89,8 +57,8 @@ gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME \
 
 Save the generated url  in a safe place.
 
-# How to deploy the UI to Heroku and GCP
-## How to deply the UI to Heroku
+## How to deploy the UI to Heroku and GCP
+### How to deply the UI to Heroku
 To depoly the UI on the heroku, create a user name on heroku website and using the following command login into it.
 ```bash
 heroku login
@@ -102,13 +70,14 @@ export UI_NAME=serpv2
 echo $UI_NAME
 heroku create ${UI_NAME}
 
-git push heroku main:main
+git push heroku master:master
 heroku ps:scale web=1
 ```
 
-After a successful depoyment, save the generated line of your UI website.
+After a successful depoyment, save the generated link of your UI website.
+Replace the link of api in the function *key_to_text* in the file *UI/serp_backend.py*
 
-## How to deploy the UI to GCP
+### How to deply the UI to GCP
 To depoly the UI on the GCP, create a user name on GCP and using the following command login into it.
 ```bash
 gcloud auth list
@@ -139,4 +108,4 @@ gcloud run deploy --image eu.gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME \
    --memory 700M --allow-unauthenticated
 ```
 
-After successful depoyment, save the generated line of your UI website.
+After a successful depoyment, save the generated line of your UI website.
