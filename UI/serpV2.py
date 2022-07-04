@@ -3,10 +3,12 @@ import streamlit as st
 from streamlit_tags import st_tags
 import streamlit.components.v1 as components
 
+
 from serp_backend import gen_serp_single, gen_serp_mass
 from gstyle_output import gen_serp_preview
 
 SAMPLE_FILE = pd.read_csv("SERPgen_sample.csv").to_csv()
+
 
 st.set_page_config(page_title="SERPgen - Just Snip It!")
 
@@ -48,8 +50,10 @@ if input_mod == 'Single':
                 "product_category": product_category,
                 "product_attributes": product_attributes
                 }
+
         if company_name and product_name and product_category and product_attributes:
             with st.spinner("Creating your customized SERP results..."):
+
                 output_single = gen_serp_single(user_input_vals)
                 st.markdown(f'> {output_single}')
                 ### google like output preview ###
@@ -64,8 +68,10 @@ else:
     st.download_button('Get CSV template here', data=SAMPLE_FILE, file_name='SERPgen_sample.csv')
     if user_file:
         input_df = pd.read_csv(user_file)
+
         if len(input_df.Attributes) > 10:
             st.error('Number of rows/product limited to 10 in free version!')
+
 
         else:
             #with st.expander('Preview of your file:'):

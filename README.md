@@ -22,7 +22,13 @@ You can access the online site by clicking the following link
 https://serpv1.herokuapp.com/
 
 # Deploy the entire user interface on your own
-To deploy the model, we need two different steps.
+First clone the entire repository with git lfs(large file System) clone.
+```bash
+git lfs install
+git lfs clone git@github.com:tomvanilla37/SERPgen.git
+```
+
+Then depoly the model. To deploy the model, we need two different steps.
 1) Upload the api (docker file) on GCP to use the prediction of model
 2) Upload the UI to Heroku of GCP to use the api.
 
