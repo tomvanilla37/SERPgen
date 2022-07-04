@@ -9,7 +9,7 @@ Using trained NLP models that are fed search results for similar products, SERPg
 
 <img src="UI/serpgen_g.png" width="500"/>
 
-For more information please check the following presentation. <br />
+For more information, please check the following presentation. <br />
 *[An NLP-based search results text generator](https://docs.google.com/presentation/d/1Vy21neAeTntBbcdmtyPCD2LMBnt8zpptBZHT6jL59mw/edit?usp=sharing)*
 
 
@@ -20,6 +20,11 @@ SERPgen is based on T5 model.
 You can access the online site by clicking the following link
 
 https://serpv1.herokuapp.com/
+
+## Data:
+
+To train or model, we used two datasets from Kaggle, one with SERP data and the other with e-commerce product descriptions. The cleaning and preparation process of the training data is documented in "SERPgen_data_preparation.ipynb" in the notebooks folder.
+
 
 # Deploy the entire user interface on your own
 First clone the entire repository with git lfs(large file System) clone.
