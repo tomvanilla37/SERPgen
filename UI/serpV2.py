@@ -7,7 +7,7 @@ import streamlit.components.v1 as components
 from serp_backend import gen_serp_single, gen_serp_mass
 from gstyle_output import gen_serp_preview
 
-SAMPLE_FILE = pd.read_csv("SERPgen_sample.csv").to_csv()
+SAMPLE_FILE = pd.read_csv("./UI/SERPgen_sample.csv").to_csv()
 
 
 st.set_page_config(page_title="SERPgen - Just Snip It!")
