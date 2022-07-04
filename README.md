@@ -23,7 +23,11 @@ https://serpv1.herokuapp.com/
 
 ## Data:
 
-To train or model, we used two datasets from Kaggle, one with SERP data and the other with e-commerce product descriptions. The cleaning and preparation process of the training data is documented in "SERPgen_data_preparation.ipynb" in the notebooks folder.
+To train or model, we used two datasets from Kaggle, one with SERP data and the other with e-commerce product descriptions:
+https://www.kaggle.com/code/kerneler/starter-data-collected-using-serp-74e5ebfa-d
+https://www.kaggle.com/code/arthurrenaud/notebooka7c0d82f1a/notebook
+
+The cleaning and preparation process of the training data is documented in "SERPgen_data_preparation.ipynb" in the notebooks folder.
 
 
 # Deploy the entire user interface on your own
