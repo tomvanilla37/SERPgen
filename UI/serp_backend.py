@@ -105,7 +105,7 @@ def check_claim(claim):
             claim += "."
         return claim
     else:
-        pass
+        return ""
 
 
 def gen_cta_goods(product_cat):
@@ -148,6 +148,7 @@ def gen_serp_goods(user_input_vals):
     product_description = (user_input_vals["product_category"] + ", " + ", ".join(user_input_vals["product_attributes"])).split(", ")
     api_output = key_to_text(product_description, **params_config_snippet)
     company_claim = check_claim(user_input_vals["company_claim"])
+
 
     serp_head = f"{user_input_vals['product_name']} by {user_input_vals['company_name']} - {company_claim}"
     merged_output = serp_head +' ' + api_output +' ' + gen_cta_goods(user_input_vals["product_category"])
