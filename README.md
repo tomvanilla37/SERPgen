@@ -1,25 +1,24 @@
 # SERPgen - an NLP-based search results text generator
-This project uses natural language processing to generate SEQ (Search Engine Query) content from keywords.
+This project uses natural language processing to generate SEO content from keywords (i.e. product attributes). This enables, for instance, e-commerce owners to create thousands of seemingly human-written product or service descriptions that are more likely to be listed on top of the search engine results pages (SERP).
 
-The cost of writing Search Engine Result Page descriptions (title and snippet) is high for business owners. Such descriptions enable products and services to appear in searches and to generate leads.
-Because of the tedious process of creating individual descriptions for each product, Search Engine Optimization professionals can focus more on other important tasks.
+This solves the problem of having to write SERP contents manually, saving costs and allowing SEO professionals to focus more on other important tasks.
 
+SERPgen is based on a modified T5 model (K2T), which was trained to generate this particular type of SERP sentences (product/service description + call-to-action) as it was fed meticulously cleaned SERP and e-commerce product data. The first sentence is the best possible prediction that can be made from the input keywords. The mechanism generating the second sentence (call-to-action), on the other hand, is randomly drawing from different keyword lists that in combination with the product attributes allows for a more creative marketing copy. 
 
-Using trained NLP models that are fed search results for similar products, SERPgenTM automatically generates search engine result title and description based on keywords such as company name + product name + attributes.
 
 <img src="UI/serpgen_g.png" width="500"/>
 
 For more information, please check the following presentation. <br />
 *[An NLP-based search results text generator](https://docs.google.com/presentation/d/1Vy21neAeTntBbcdmtyPCD2LMBnt8zpptBZHT6jL59mw/edit?usp=sharing)*
 
+## Preview:
+You can access the SERPgen web application by clicking the following link:
+https://serpv1.herokuapp.com/
 
 
 ## Model:
-SERPgen is based on T5 model.
+SERPgen is based on the K2T variant of Huggyface's T5 model: https://github.com/gagan3012/keytotext 
 
-You can access the online site by clicking the following link
-
-https://serpv1.herokuapp.com/
 
 ## Data:
 
