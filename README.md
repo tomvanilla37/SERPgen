@@ -1,5 +1,5 @@
 # SERPgen - an NLP-based search results text generator
-This project uses natural language processing to generate SEO content from keywords (i.e. product attributes). This enables, for instance, e-commerce owners to create thousands of seemingly human-written product or service descriptions that are more likely to be listed on top of the search engine results pages (SERP).
+This project uses natural language processing to generate SEO content from keywords (i.e. product attributes). This enables, for instance, e-commerce owners to create thousands of seemingly human-written product or service descriptions that are more likely to be listed on top of search engine results pages (SERP).
 
 This solves the problem of having to write SERP contents manually, saving costs and allowing SEO professionals to focus more on other important tasks.
 
