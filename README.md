@@ -13,7 +13,7 @@ For more information, please check the following presentation. <br />
 
 ## Preview:
 You can access the SERPgen web application by clicking the following link:
-https://serpv1.herokuapp.com/
+[SERPgen](https://alirezahabibi2010-serpgen-uiserpv2-n5uk57.streamlit.app/)
 
 
 ## Model:
